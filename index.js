@@ -23,9 +23,24 @@ const client = new line.Client(config);
 
 // 送られたwebhookに対する処理の関数
 const handleEvent = (event) => {
+  if (event.type === "follow") {
+    followEvent(event);
+  }
   if (event.type !== "message" || event.message.type !== "text") {
     return Promise.resolve(null);
   }
+  else {
+    return messageEvent(event);
+  }
+}
+
+const followEvent = (event) => {
+  return client.replyMessage(event.replyToken, {
+    type: "text",
+    text: "登録ありがとうございます"
+  });
+}
+const messageEvent = (event) => {
   if (event.message.text === "おきた") {
     return client.replyMessage(event.replyToken, {
       type: "text",
