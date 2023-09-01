@@ -1,0 +1,18 @@
+{
+  "name": "asamit-linebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx functions-framework --target=handler",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.3.0",
+    "@line/bot-sdk": "^7.5.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  }
+}
