@@ -26,11 +26,14 @@ const handleEvent = (event) => {
   if (event.type === "follow") {
     followEvent(event);
   }
-  if (event.type !== "message" || event.message.type !== "text") {
+  else if (event.type === "postback") {
+    timesettingEvent(event);
+  }
+  else if (event.type !== "message" || event.message.type !== "text") {
     return Promise.resolve(null);
   }
   else {
-    return messageEvent(event);
+    messageEvent(event);
   }
 }
 
@@ -40,13 +43,28 @@ const followEvent = (event) => {
     text: "登録ありがとうございます"
   });
 }
+const timesettingEvent = (event) => {
+  return client.replyMessage(event.replyToken, {
+    type: "text",
+    text: event.postback.params.time
+  });
+}
 const messageEvent = (event) => {
   if (event.message.text === "おきた") {
     return client.replyMessage(event.replyToken, {
       type: "text",
       text: "起床を記録しました",
     });
-  } else {
+  }
+  else if (event.message.text === "日時設定") {
+    return client.replyMessage(event.replyToken, {
+      type: "datetimepicker",
+      label: "Select date",
+      data: "storeId=12345",
+      mode: "time"
+    });
+  }
+  else {
     return client.replyMessage(event.replyToken, {
       type: "text",
       text: event.message.text
