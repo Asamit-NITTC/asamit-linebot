@@ -1,14 +1,19 @@
 const express = require("express");
 const line = require("@line/bot-sdk");
+const followEvent = require("./followEvent");
+const buttonTmpWaking = require("./buttonTmpWaking");
 const app = express();
 
 require("dotenv").config();
 
+// 認証情報とclientの宣言
 const config = {
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
   channelSecret: process.env.CHANNEL_SECRET,
 };
+const client = new line.Client(config);
 
+// ルーティング
 app.post("/handler/webhook", line.middleware(config), async (req, res) => {
   const result = await Promise.all(req.body.events.map(handleEvent));
   res.json(result);
@@ -18,13 +23,10 @@ app.get("/handler/*", (req, res) => {
   res.send("Error");
 });
 
-// ここでクライアントを宣言
-const client = new line.Client(config);
-
 // 送られたwebhookに対する処理の関数
 const handleEvent = (event) => {
   if (event.type === "follow") {
-    followEvent(event);
+    followEvent(client, event);
   }
   if (event.type !== "message" || event.message.type !== "text") {
     return Promise.resolve(null);
@@ -34,40 +36,18 @@ const handleEvent = (event) => {
   }
 }
 
-const followEvent = (event) => {
-  return client.replyMessage(event.replyToken, {
-    type: "text",
-    text: "登録ありがとうございます"
-  });
-}
+// メッセージ内容によって処理を分岐する関数
 const messageEvent = (event) => {
-  if (event.message.text === "おきた") {
-    return client.replyMessage(event.replyToken, {
-      "type": "template",
-      "altText": "this is a buttons template",
-      "template": {
-        "type": "buttons",
-        "text": "6:03に起床を記録します",
-        "actions": [
-          {
-            "type": "message",
-            "label": "はい（目標記入に進む）",
-            "text": "yes"
-          },
-          {
-            "type": "message",
-            "label": "キャンセル",
-            "text": "no"
-          }
-        ]
-      }
-    });
-  } /*else {
-    return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: event.message.text
-    });
-  }*/
+  switch (event.message.text) {
+    case "おきた":
+      buttonTmpWaking(event, client);
+      break;
+    default:
+      return client.replyMessage(event.replyToken, {
+        type: "text",
+        text: "無効な操作です"
+      })
+  }
 };
 
 exports.handler = app;
