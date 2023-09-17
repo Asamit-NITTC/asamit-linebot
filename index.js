@@ -43,15 +43,31 @@ const followEvent = (event) => {
 const messageEvent = (event) => {
   if (event.message.text === "おきた") {
     return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: "起床を記録しました",
+      "type": "template",
+      "altText": "this is a buttons template",
+      "template": {
+        "type": "buttons",
+        "text": "6:03に起床を記録します",
+        "actions": [
+          {
+            "type": "message",
+            "label": "はい（目標記入に進む）",
+            "text": "yes"
+          },
+          {
+            "type": "message",
+            "label": "キャンセル",
+            "text": "no"
+          }
+        ]
+      }
     });
-  } else {
+  } /*else {
     return client.replyMessage(event.replyToken, {
       type: "text",
       text: event.message.text
     });
-  }
+  }*/
 };
 
 exports.handler = app;
