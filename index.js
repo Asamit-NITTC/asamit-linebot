@@ -47,7 +47,7 @@ const messageEvent = (event) => {
       buttonTmpWaking(event, client);
       break;
     case "時刻":
-      setTimeWakeUp(event, client);
+      setTimeWakeUp.buttonTmp(event, client);
       break;
     default:
       return client.replyMessage(event.replyToken, {
@@ -59,10 +59,7 @@ const messageEvent = (event) => {
 
 const postbackEvent = (event) => {
   if (event.postback.data === "timeWakeUp") {
-    return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: event.postback.params.time + "に設定しました"
-    })
+    setTimeWakeUp.postback(event, client);
   } else {
     return client.replyMessage(event.replyToken, {
       type: "text",
