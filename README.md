@@ -15,3 +15,14 @@ echo "CHANNEL_ACCESS_TOKEN=[token]"
 ```
 ngrok http 8080 --host-header="localhost:8080"
 ```
+## Deploy
+```
+gcloud functions deploy linebot \
+--gen2 \
+--region=asia-northeast1 \
+--runtime=nodejs18 \
+--source=. \
+--entry-point=handler \
+--allow-unauthenticated \
+--trigger-http
+```
