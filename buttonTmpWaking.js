@@ -19,7 +19,7 @@ const buttonTmpWaking = (event, client) => {
         {
           "type": "uri",
           "label": "はい（目標記入に進む）",
-          "uri": `${LIFF_BASE_URL}/wakeup`
+          "uri": `${LIFF_BASE_URL}/wakeup?timestamp=${timestamp}`
         },
         {
           "type": "message",

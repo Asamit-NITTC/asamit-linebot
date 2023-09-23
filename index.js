@@ -2,7 +2,7 @@ const express = require("express");
 const line = require("@line/bot-sdk");
 const followEvent = require("./followEvent");
 const buttonTmpWaking = require("./buttonTmpWaking");
-const setTimeWakeUp = require("./setTimeWakeUp")
+const setTargetTime = require("./setTargetTime")
 const app = express();
 
 if (process.env.NODE_ENV === "development") {
@@ -52,7 +52,7 @@ const messageEvent = (event) => {
       buttonTmpWaking(event, client);
       break;
     case "時刻":
-      setTimeWakeUp.buttonTmp(event, client);
+      setTargetTime.buttonTmp(event, client);
       break;
     default:
       return client.replyMessage(event.replyToken, {
@@ -64,7 +64,7 @@ const messageEvent = (event) => {
 
 const postbackEvent = (event) => {
   if (event.postback.data === "timeWakeUp") {
-    setTimeWakeUp.postback(event, client);
+    setTargetTime.postback(event, client);
   } else {
     return client.replyMessage(event.replyToken, {
       type: "text",

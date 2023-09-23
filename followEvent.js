@@ -16,7 +16,6 @@ const followEvent = async (client, event) => {
         {
           "type": "uri",
           "label": "会員登録",
-          //"uri": "https://liff.line.me/1661190118-0GzYyEBV/liff/signup"
           "uri": `${LIFF_BASE_URL}/signup`
         }
       ]
