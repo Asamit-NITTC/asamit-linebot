@@ -19,3 +19,15 @@ if you have custom-domain on ngrok
 ```
 ngrok http --domain=xxxxxxxxxxx.ngrok-free.app 8080
 ```
+
+## Deploy
+```
+gcloud functions deploy linebot \
+--gen2 \
+--region=asia-northeast1 \
+--runtime=nodejs18 \
+--source=. \
+--entry-point=handler \
+--allow-unauthenticated \
+--trigger-http
+```
