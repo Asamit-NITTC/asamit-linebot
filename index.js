@@ -2,6 +2,7 @@ const express = require("express");
 const line = require("@line/bot-sdk");
 const followEvent = require("./followEvent");
 const buttonTmpWaking = require("./buttonTmpWaking");
+const setTimeWakeUp = require("./setTimeWakeUp")
 const app = express();
 
 require("dotenv").config();
@@ -28,6 +29,9 @@ const handleEvent = (event) => {
   if (event.type === "follow") {
     followEvent(client, event);
   }
+  if (event.type === "postback") {
+    postbackEvent(event);
+  }
   if (event.type !== "message" || event.message.type !== "text") {
     return Promise.resolve(null);
   }
@@ -42,6 +46,9 @@ const messageEvent = (event) => {
     case "おきた":
       buttonTmpWaking(event, client);
       break;
+    case "時刻":
+      setTimeWakeUp.buttonTmp(event, client);
+      break;
     default:
       return client.replyMessage(event.replyToken, {
         type: "text",
@@ -49,5 +56,16 @@ const messageEvent = (event) => {
       })
   }
 };
+
+const postbackEvent = (event) => {
+  if (event.postback.data === "timeWakeUp") {
+    setTimeWakeUp.postback(event, client);
+  } else {
+    return client.replyMessage(event.replyToken, {
+      type: "text",
+      text: "エラー"
+    })
+  }
+}
 
 exports.handler = app;
