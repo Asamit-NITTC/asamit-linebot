@@ -5,7 +5,12 @@ const buttonTmpWaking = require("./buttonTmpWaking");
 const setTimeWakeUp = require("./setTimeWakeUp")
 const app = express();
 
-require("dotenv").config();
+if (process.env.NODE_ENV === "development") {
+  console.log("development mode")
+  require("dotenv").config({ path: ".env.local" });
+} else {
+  require("dotenv").config();
+}
 
 // 認証情報とclientの宣言
 const config = {

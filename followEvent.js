@@ -1,3 +1,10 @@
+if (process.env.NODE_ENV === "development") {
+  require("dotenv").config({ path: ".env.local" });
+} else {
+  require("dotenv").config();
+}
+const LIFF_BASE_URL = process.env.LIFF_BASE_URL;
+
 const followEvent = async (client, event) => {
   return client.replyMessage(event.replyToken, {
     "type": "template",
@@ -10,7 +17,7 @@ const followEvent = async (client, event) => {
           "type": "uri",
           "label": "会員登録",
           //"uri": "https://liff.line.me/1661190118-0GzYyEBV/liff/signup"
-          "uri": "https://liff.line.me/2000473270-5YqBPKWe/signup"
+          "uri": `${LIFF_BASE_URL}/signup`
         }
       ]
     }

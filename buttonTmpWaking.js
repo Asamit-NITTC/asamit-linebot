@@ -1,3 +1,10 @@
+if (process.env.NODE_ENV === "development") {
+  require("dotenv").config({ path: ".env.local" });
+} else {
+  require("dotenv").config();
+}
+const LIFF_BASE_URL = process.env.LIFF_BASE_URL
+
 const buttonTmpWaking = (event, client) => {
   const timestamp = event.timestamp;
   const timestampDate = new Date(timestamp);
@@ -12,7 +19,7 @@ const buttonTmpWaking = (event, client) => {
         {
           "type": "uri",
           "label": "はい（目標記入に進む）",
-          "uri": "https://liff.line.me/1661190118-0GzYyEBV/wakeup"
+          "uri": `${LIFF_BASE_URL}/wakeup`
         },
         {
           "type": "message",
