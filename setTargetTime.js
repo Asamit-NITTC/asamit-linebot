@@ -36,7 +36,7 @@ const buttonTmpConfirmTime = (targetTime, event, client) => {
         {
           "type": "uri",
           "label": "はい",
-          "uri": `${LIFF_BASE_URL}/setTime`
+          "uri": `${LIFF_BASE_URL}/setTime?target-time=${targetTime}`
         }
       ]
     }
