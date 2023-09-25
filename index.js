@@ -2,8 +2,9 @@ const express = require("express");
 const line = require("@line/bot-sdk");
 const followEvent = require("./followEvent");
 const buttonTmpWaking = require("./buttonTmpWaking");
-const setTargetTime = require("./setTargetTime")
+const setTargetTime = require("./setTargetTime");
 const app = express();
+const richmenu = require("./richmenu");
 
 if (process.env.NODE_ENV === "development") {
   console.log("development mode")
@@ -20,13 +21,14 @@ const config = {
 const client = new line.Client(config);
 
 // ルーティング
+app.use("/handler/richmenu", richmenu);
 app.post("/handler/webhook", line.middleware(config), async (req, res) => {
   const result = await Promise.all(req.body.events.map(handleEvent));
   res.json(result);
 });
 app.get("/handler/test", (req, res) => res.send("bot success"));
 app.get("/handler/*", (req, res) => {
-  res.send("Error");
+  res.status(404).send("Error");
 });
 
 // 送られたwebhookに対する処理の関数

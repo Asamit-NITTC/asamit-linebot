@@ -48,6 +48,7 @@ const obj = {
         "label": "AsamitAppを開く",
         "text": `${LIFF_BASE_URL}/main`
       }
-    },
+    }
   ]
 }
+module.exports = obj;
