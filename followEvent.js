@@ -6,23 +6,13 @@ if (process.env.NODE_ENV === "development") {
 const LIFF_BASE_URL = process.env.LIFF_BASE_URL;
 
 const followEvent = async (client, event) => {
-  return client.replyMessage(event.replyToken, {
-    "type": "template",
-    "altText": "this is a buttons template",
-    "template": {
-      "type": "buttons",
-      "text": "登録ありがとうございます！朝活を始めましょう！",
-      "actions": [
-        {
-          "type": "uri",
-          "label": "会員登録",
-          "uri": `${LIFF_BASE_URL}/signup`
-        }
-      ]
-    }
-  })
+  return client.replyMessage(event.replyToken, paramFollowEvent)
 }
 
+const paramFollowEvent = {
+  type: "text",
+  text: "友だち登録ありがとうございます！\n下メニューをタップして始めましょう"
+}
 /*
 const signUp = async () => {
   try {
@@ -39,7 +29,25 @@ const signUp = async () => {
     return false;
   }
 }
-
+*/
+/*
+const paramBtnTemplate = {
+  "type": "template",
+  "altText": "this is a buttons template",
+  "template": {
+    "type": "buttons",
+    "text": "登録ありがとうございます！朝活を始めましょう！",
+    "actions": [
+      {
+        "type": "uri",
+        "label": "会員登録",
+        "uri": `${LIFF_BASE_URL}/signup`
+      }
+    ]
+  }
+}
+*/
+/*
 const paramSuccess = {
   type: "text",
   text: "会員登録に成功しました"

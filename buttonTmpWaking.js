@@ -11,7 +11,7 @@ const buttonTmpWaking = (event, client) => {
   const timeWakeup = timestampDate.getHours()+":"+timestampDate.getMinutes();
   return client.replyMessage(event.replyToken, {
     "type": "template",
-    "altText": "this is a buttons template",
+    "altText": timeWakeup + "に起床を記録します",
     "template": {
       "type": "buttons",
       "text": timeWakeup + "に起床を記録します",
