@@ -8,7 +8,7 @@ const LIFF_BASE_URL = process.env.LIFF_BASE_URL
 const buttonTmpWaking = (event, client) => {
   const timestamp = event.timestamp;
   const timestampDate = new Date(timestamp);
-  const timeWakeup = timestampDate.getHours()+":"+timestampDate.getMinutes();
+  const timeWakeup = (timestampDate.getHours()+9)+"時"+timestampDate.getMinutes()+"分";
   return client.replyMessage(event.replyToken, {
     "type": "template",
     "altText": timeWakeup + "に起床を記録します",
