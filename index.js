@@ -62,11 +62,36 @@ const messageEvent = (event) => {
     case /^おきた$/.test(messageText):
       buttonTmpWaking(event, client);
       break;
-    /*
-    case "時刻":
-      setTargetTime.buttonTmp(event, client);
+    case /^起床時刻を更新しました$/.test(messageText):
+      client.replyMessage(event.replyToken, {
+        type: "text",
+        text: "設定した時刻を目指して頑張りましょう！"
+      })
       break;
-    */
+    case /^起床報告に失敗しました$/.test(messageText):
+      client.replyMessage(event.replyToken, {
+        type: "text",
+        text: "もう一度お試しください"
+      })
+      break;
+    case /^時刻更新に失敗しました$/.test(messageText):
+      client.replyMessage(event.replyToken, {
+        type: "text",
+        text: "もう一度お試しください"
+      })
+      break;
+    case /^起床報告を記録しました$/.test(messageText):
+      client.replyMessage(event.replyToken, {
+        type: "text",
+        text: "おはようございます！今日も１日頑張りましょう！"
+      })
+      break;
+    case /^登録に失敗しました$/.test(messageText):
+      client.replyMessage(event.replyToken, {
+        type: "text",
+        text: "しばらく待ってからお試しください"
+      })
+      break
     case /^登録済みです$/.test(messageText):
       switchRichMenu.toNormal(event, client);
       break;
@@ -74,6 +99,8 @@ const messageEvent = (event) => {
       const uid = messageText.match(/[^登録完了\nID: $].+/);
       switchRichMenu.toNormalWithUID(uid, event, client);
       break;
+    case /^no$/.test(messageText):
+      break
     default:
       return client.replyMessage(event.replyToken, {
         type: "text",
