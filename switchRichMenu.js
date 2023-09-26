@@ -6,9 +6,13 @@ if (process.env.NODE_ENV === "development") {
 const API_BASE_URL = process.env.API_BASE_URL;
 const axios = require("axios");
 
-const switchRichMenu = async(uid, event, client) => {
+const toNormalWithUID = async(uid, event, client) => {
   const isRegistered = await verifyUserIsRegistered(uid);
   if (!isRegistered) return replyMessage(client, event, "まだ登録されていません");
+  await toNormalBasic(event, client);
+}
+
+const toNormalBasic = async(event, client) => {
   try {
     const {richMenuId} = await client.getRichMenuAlias("rich-menu-normal");
     await client.linkRichMenuToUser(event.source.userId, richMenuId);
@@ -34,6 +38,11 @@ const verifyUserIsRegistered = async(uid) => {
     return false;
   }
 
+}
+
+const switchRichMenu = {
+  toNormal: toNormalBasic,
+  toNormalWithUID: toNormalWithUID
 }
 
 module.exports = switchRichMenu;
