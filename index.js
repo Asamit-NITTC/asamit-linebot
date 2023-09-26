@@ -67,9 +67,12 @@ const messageEvent = (event) => {
       setTargetTime.buttonTmp(event, client);
       break;
     */
+    case /^登録済みです$/.test(messageText):
+      switchRichMenu.toNormal(event, client);
+      break;
     case /^登録完了\nID: /.test(messageText):
       const uid = messageText.match(/[^登録完了\nID: $].+/);
-      switchRichMenu(uid, event, client);
+      switchRichMenu.toNormalWithUID(uid, event, client);
       break;
     default:
       return client.replyMessage(event.replyToken, {
