@@ -7,7 +7,7 @@ const API_BASE_URL = process.env.API_BASE_URL;
 const axios = require("axios");
 
 const switchRichMenu = async(uid, event, client) => {
-  const isRegistered = verifyUserIsRegistered(uid);
+  const isRegistered = await verifyUserIsRegistered(uid);
   if (!isRegistered) return replyMessage(client, event, "まだ登録されていません");
   try {
     const {richMenuId} = await client.getRichMenuAlias("rich-menu-normal");
@@ -28,7 +28,7 @@ const replyMessage = (client, event, text) => {
 const verifyUserIsRegistered = async(uid) => {
   const url = new URL(`${API_BASE_URL}/users/${uid}`);
   try {
-    const res = await axios.get(url);
+    await axios.get(url);
     return true;
   } catch(err) {
     return false;

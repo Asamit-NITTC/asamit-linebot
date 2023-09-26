@@ -3,7 +3,7 @@ if (process.env.NODE_ENV === "development") {
 } else {
   require("dotenv").config();
 }
-const LIFF_BASE_URL = process.env.LIFF_BASE_URL;
+//const LIFF_BASE_URL = process.env.LIFF_BASE_URL;
 
 const followEvent = async (client, event) => {
   return client.replyMessage(event.replyToken, paramFollowEvent)
