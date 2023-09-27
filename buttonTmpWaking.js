@@ -7,14 +7,15 @@ const LIFF_BASE_URL = process.env.LIFF_BASE_URL
 
 const buttonTmpWaking = (event, client) => {
   const timestamp = event.timestamp;
-  const timestampDate = new Date(timestamp);
-  const timeWakeup = (timestampDate.getHours()+9)+"時"+timestampDate.getMinutes()+"分";
-  return client.replyMessage(event.replyToken, {
+  const timestampDate = new Date(timestamp).toLocaleTimeString("ja-JP", {timeZone: "Asia/Tokyo" });
+  const timeWakeup = timestampDate.slice(0,-3);
+  const timeWakeupHours = parseInt(timestampDate.slice(0,-6))
+  const timeOk = {
     "type": "template",
-    "altText": timeWakeup + "に起床を記録します",
+    "altText": `${timeWakeup}に起床を記録します`,
     "template": {
       "type": "buttons",
-      "text": timeWakeup + "に起床を記録します",
+      "text": `${timeWakeup}に起床を記録します`,
       "actions": [
         {
           "type": "uri",
@@ -28,7 +29,28 @@ const buttonTmpWaking = (event, client) => {
         }
       ]
     }
-  })
-}
+  }
+  const timeNg = {
+    "type": "template",
+    "altText": `${timeWakeup}：受付時間外です`,
+    "template": {
+      "type": "buttons",
+      "text": `${timeWakeup}：受付時間外です`,
+      "actions": [
+        {
+          "type": "message",
+          "label": "キャンセル",
+          "text": "no"
+        }
+      ]
+    }
+  }
+
+  let params = timeOk;
+  if (8<timeWakeupHours || timeWakeupHours<4) {
+    params = timeNg;
+  }
+  return client.replyMessage(event.replyToken, params);
+ }
 
 module.exports = buttonTmpWaking;
