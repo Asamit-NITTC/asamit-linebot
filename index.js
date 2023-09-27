@@ -101,6 +101,11 @@ const messageEvent = (event) => {
       break;
     case /^no$/.test(messageText):
       break
+    case /^feedback>>.*$/.test(messageText):
+      return client.replyMessage(event.replyToken, {
+        type: "text",
+        text: "貴重なご意見ありがとうございます！"
+      })
     default:
       return client.replyMessage(event.replyToken, {
         type: "text",
