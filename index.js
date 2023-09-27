@@ -68,6 +68,12 @@ const messageEvent = (event) => {
         text: "設定した時刻を目指して頑張りましょう！"
       })
       break;
+    case /^はじめる$/.test(messageText):
+      client.replyMessage(event.replyToken, {
+        type: "text",
+        text: "登録時間前です。まずはこちらのオープンチャットに参加してください！\n【参加コード：12345678】\nhttps://line.me/ti/g2/UK30v4mk-ttWfra0osQNdqACS1O2Mqct5-IlEA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
+      })
+      break;
     case /^起床報告に失敗しました$/.test(messageText):
       client.replyMessage(event.replyToken, {
         type: "text",
