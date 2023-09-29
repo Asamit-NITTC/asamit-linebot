@@ -11,7 +11,7 @@ const followEvent = async (client, event) => {
 
 const paramFollowEvent = {
   type: "text",
-  text: "友だち登録ありがとうございます！\n下メニューをタップして始めましょう"
+  text: "友だち登録ありがとうございます！\n【実証実験中】\n下のオープンチャットに参加して案内を受けましょう\n参加コード: 12345678\nhttps://line.me/ti/g2/UK30v4mk-ttWfra0osQNdqACS1O2Mqct5-IlEA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
 }
 /*
 const signUp = async () => {

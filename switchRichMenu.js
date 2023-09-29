@@ -19,7 +19,7 @@ const toNormalBasic = async(event, client) => {
   } catch {
     return replyMessage(client, event, "リッチメニューの更新に失敗しました")
   }
-    return replyMessage(client, event, "さあ！早起きを始めましょう！")
+    return replyMessage(client, event, "さあ！早起きを始めましょう！\nまずは「時刻設定」から起床時刻を設定します")
 }
 
 const replyMessage = (client, event, text) => {
