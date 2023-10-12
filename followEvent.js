@@ -6,13 +6,22 @@ if (process.env.NODE_ENV === "development") {
 //const LIFF_BASE_URL = process.env.LIFF_BASE_URL;
 
 const followEvent = async (client, event) => {
-  return client.replyMessage(event.replyToken, paramFollowEvent)
+  return client.replyMessage(event.replyToken, [imgFollowEvent, paramFollowEvent])
 }
 
 const paramFollowEvent = {
   type: "text",
-  text: "友だち登録ありがとうございます！\n【実証実験中】\n下のオープンチャットに参加して案内を受けましょう\n参加コード: 12345678\nhttps://line.me/ti/g2/UK30v4mk-ttWfra0osQNdqACS1O2Mqct5-IlEA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
+  text: "こんにちは！朝活支援アプリAsamit!です。\n友だち登録ありがとうございます！下のメニューの「はじめよう！」をタップして始めましょう"
 }
+const imgFollowEvent = {
+  type: "image",
+  originalContentUrl: "https://i.gyazo.com/d2659a3ae1e43f2df91a1a534f894c1e.png",
+  previewImageUrl: "https://i.gyazo.com/d2659a3ae1e43f2df91a1a534f894c1e.png"
+}
+/*
+const messageForSchool = "友だち登録ありがとうございます！\n【実証実験中】\n下のオープンチャットに参加して案内を受けましょう\n参加コード: 12345678\nhttps://line.me/ti/g2/UK30v4mk-ttWfra0osQNdqACS1O2Mqct5-IlEA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
+*/
+
 /*
 const signUp = async () => {
   try {

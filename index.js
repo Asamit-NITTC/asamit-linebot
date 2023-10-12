@@ -96,8 +96,8 @@ const messageEvent = (event) => {
       switchRichMenu.toNormal(event, client);
       break;
     case /^登録完了\nID: /.test(messageText):
-      const uid = messageText.match(/[^登録完了\nID: $].+/);
-      switchRichMenu.toNormalWithUID(uid, event, client);
+      //const uid = messageText.match(/[^登録完了\nID: $].+/);
+      switchRichMenu.toNormal(event, client);
       break;
     case /^no$/.test(messageText):
       break
