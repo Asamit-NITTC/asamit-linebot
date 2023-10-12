@@ -8,7 +8,7 @@ const axios = require("axios");
 
 const toNormalWithUID = async(uid, event, client) => {
   const isRegistered = await verifyUserIsRegistered(uid);
-  if (!isRegistered) return replyMessage(client, event, "まだ登録されていません");
+  if (!isRegistered) return replyMessage(client, event, "登録中です。メニュー表示が変わるまでお待ちください");
   await toNormalBasic(event, client);
 }
 

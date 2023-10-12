@@ -47,7 +47,7 @@ const buttonTmpWaking = (event, client) => {
   }
 
   let params = timeOk;
-  if (8<timeWakeupHours || timeWakeupHours<4) {
+  if (false && 8<timeWakeupHours || timeWakeupHours<4) {
     params = timeNg;
   }
   return client.replyMessage(event.replyToken, params);
